@@ -11,10 +11,8 @@ services:
     networks:
       - net-driver
       - eureka_net-driver
-      - prometheus_net-driver
     external_links:
       - eureka:eureka
-      - prometheus:prometheus
     depends_on:
       - db
     links:
@@ -44,6 +42,4 @@ networks:
   net-driver:
     driver: bridge
   eureka_net-driver:
-    external: true
-  prometheus_net-driver:
     external: true
