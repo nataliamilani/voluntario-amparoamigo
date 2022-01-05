@@ -14,12 +14,12 @@ services:
     external_links:
       - eureka:eureka
     depends_on:
-      - db
+      - dbvoluntario
     links:
-      - db
+      - dbvoluntario
     restart: on-failure
 
-  db:
+  dbvoluntario:
     image: mysql
     container_name: dbvoluntario
     hostname: dbvoluntario
