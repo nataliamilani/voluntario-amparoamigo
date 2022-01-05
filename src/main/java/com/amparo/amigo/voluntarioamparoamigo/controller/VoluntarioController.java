@@ -30,11 +30,17 @@ public class VoluntarioController {
     }
 
     //GET PARA CONSULTAR TODOS VOLUNTARIOS
-    @GetMapping(value = "/{cpfCnpj}")
+    @GetMapping(value = "/cpf_cnpj/{cpfCnpj}")
     public Optional<Voluntario> consultaVoluntario(@PathVariable("cpfCnpj") String cpfCnpj) {
 
         return VoluntarioService.consultaVoluntario(cpfCnpj);
     }
 
+    //GET PARA CONSULTAR TODOS VOLUNTARIOS
+    @GetMapping(value = "/id/{idVoluntario}")
+    public Optional<Voluntario> consultaVoluntarioId(@PathVariable("idVoluntario") Integer idVoluntario) {
+
+        return VoluntarioService.consultaVoluntarioId(idVoluntario);
+    }
 
 }

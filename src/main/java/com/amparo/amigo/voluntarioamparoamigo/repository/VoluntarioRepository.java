@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface VoluntarioRepository extends JpaRepository<Voluntario, String> {
 
     Optional<Voluntario> findByCpfCnpj(String cpfCnpj);
+    Optional<Voluntario> findByIdVoluntario(Integer idVoluntario);
 
 }

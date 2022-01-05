@@ -49,14 +49,42 @@ public class Voluntario implements Serializable {
     @Column(name = "estado")
     private String estado;
 
+    @Column(name = "tiposervico1")
+    private String tiposervico1;
+
+    @Column(name = "tiposervico2")
+    private String tiposervico2;
+
+    @Column(name = "tiposervico3")
+    private String tiposervico3;
+
+    @Column(name = "categoria1")
+    private String categoria1;
+
+    @Column(name = "categoria2")
+    private String categoria2;
+
+    @Column(name = "categoria3")
+    private String categoria3;
+
+    @Column(name = "descricao")
+    private String descricao;
+
     @JsonCreator
-    public Voluntario( @JsonProperty("nome") String nome,
-                       @JsonProperty("data_nascimento") @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") Date dataNascimento,
-                       @JsonProperty("cpf_cnpj") String cpfCnpj,
-                       @JsonProperty("celular") String celular,
-                       @JsonProperty("logradouro") String logradouro,
+    public Voluntario( @JsonProperty("nomeCompleto") String nome,
+                       @JsonProperty("dataNascimento") @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") Date dataNascimento,
+                       @JsonProperty("cpfCnpj") String cpfCnpj,
+                       @JsonProperty("telefoneCelular") String celular,
+                       @JsonProperty("endereco") String logradouro,
                        @JsonProperty("cidade") String cidade,
                        @JsonProperty("estado") String estado,
+                       @JsonProperty("tipoServico1") String tiposervico1,
+                       @JsonProperty("tipoServico2") String tiposervico2,
+                       @JsonProperty("tipoServico3") String tiposervico3,
+                       @JsonProperty("categoria1") String categoria1,
+                       @JsonProperty("categoria2") String categoria2,
+                       @JsonProperty("categoria3") String categoria3,
+                       @JsonProperty("descricao") String descricao,
                        @JsonProperty("email") String email,
                        @JsonProperty("senha") String senha
                        )
@@ -68,12 +96,17 @@ public class Voluntario implements Serializable {
         this.logradouro = logradouro;
         this.cidade = cidade;
         this.estado = estado;
+        this.tiposervico1 = tiposervico1;
+        this.tiposervico2 = tiposervico2;
+        this.tiposervico3 = tiposervico3;
+        this.categoria1 = categoria1;
+        this.categoria2 = categoria2;
+        this.categoria3 = categoria3;
+        this.descricao = descricao;
         this.email = email;
         this.senha = senha;
     }
 
     public Voluntario(){ super(); }
-
-
 
 }

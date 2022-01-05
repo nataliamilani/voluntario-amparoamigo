@@ -36,4 +36,15 @@ public class VoluntarioService {
 
         return repository.findByCpfCnpj(cpfCnpj);
     }
+
+    public static Optional<Voluntario> consultaVoluntarioId(Integer idVoluntario) {
+
+        var consultaVoluntarioId = repository.findByIdVoluntario(idVoluntario).isPresent();
+
+        if(!consultaVoluntarioId){
+            throw new VoluntarioNotFoundException("Voluntário não encontrado na base de cadastro!");
+        }
+
+        return repository.findByIdVoluntario(idVoluntario);
+    }
 }
