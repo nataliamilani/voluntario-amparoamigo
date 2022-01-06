@@ -1,10 +1,12 @@
 package com.amparo.amigo.voluntarioamparoamigo.service;
 
+import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioDTO;
 import com.amparo.amigo.voluntarioamparoamigo.entity.Voluntario;
 import com.amparo.amigo.voluntarioamparoamigo.exceptions.VoluntarioNotFoundException;
 import com.amparo.amigo.voluntarioamparoamigo.repository.VoluntarioRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +28,7 @@ public class VoluntarioService {
         return repository.save(voluntario);
     }
 
-    public static Optional<Voluntario> consultaVoluntario(String cpfCnpj) {
+    public static VoluntarioDTO consultaVoluntario(String cpfCnpj) {
 
         var consultaVoluntario = repository.findByCpfCnpj(cpfCnpj).isPresent();
 
@@ -34,10 +36,10 @@ public class VoluntarioService {
             throw new VoluntarioNotFoundException("Voluntário não encontrado na base de cadastro!");
         }
 
-        return repository.findByCpfCnpj(cpfCnpj);
+        return VoluntarioDTO.transformaDTO(repository.findByCpfCnpj(cpfCnpj));
     }
 
-    public static Optional<Voluntario> consultaVoluntarioId(Integer idVoluntario) {
+    public static VoluntarioDTO consultaVoluntarioId(Integer idVoluntario) {
 
         var consultaVoluntarioId = repository.findByIdVoluntario(idVoluntario).isPresent();
 
@@ -45,6 +47,28 @@ public class VoluntarioService {
             throw new VoluntarioNotFoundException("Voluntário não encontrado na base de cadastro!");
         }
 
-        return repository.findByIdVoluntario(idVoluntario);
+        return VoluntarioDTO.transformaDTO(repository.findByIdVoluntario(idVoluntario));
     }
+
+    public static List<VoluntarioDTO> consultaTodosVoluntarios() {
+
+        var consultaVoluntarios = repository.findAll();
+
+        if(consultaVoluntarios.isEmpty()){
+            throw new VoluntarioNotFoundException("Não há voluntários na base de cadastro!");
+        }
+
+        List<VoluntarioDTO> listVoluntario = new ArrayList<>();
+
+        for (Integer i=0; i < consultaVoluntarios.size(); i++){
+
+            listVoluntario.add(VoluntarioDTO.transformaDTO(consultaVoluntarios.get(i)));
+        }
+
+        return listVoluntario;
+    }
+
+
+
+
 }

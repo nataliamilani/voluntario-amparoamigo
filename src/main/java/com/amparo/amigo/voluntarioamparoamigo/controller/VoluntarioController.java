@@ -1,5 +1,6 @@
 package com.amparo.amigo.voluntarioamparoamigo.controller;
 
+import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioDTO;
 import com.amparo.amigo.voluntarioamparoamigo.entity.Voluntario;
 import com.amparo.amigo.voluntarioamparoamigo.service.VoluntarioService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,18 +30,27 @@ public class VoluntarioController {
         return voluntarioService.cadastrarVoluntario(voluntario);
     }
 
-    //GET PARA CONSULTAR TODOS VOLUNTARIOS
+    //GET PARA CONSULTAR VOLUNTARIOS POR CPF OU CNPJ
     @GetMapping(value = "/cpf_cnpj/{cpfCnpj}")
-    public Optional<Voluntario> consultaVoluntario(@PathVariable("cpfCnpj") String cpfCnpj) {
+    public VoluntarioDTO consultaVoluntario(@PathVariable("cpfCnpj") String cpfCnpj) {
 
         return VoluntarioService.consultaVoluntario(cpfCnpj);
     }
 
-    //GET PARA CONSULTAR TODOS VOLUNTARIOS
+    //GET PARA CONSULTAR VOLUNTARIOS POR ID
     @GetMapping(value = "/id/{idVoluntario}")
-    public Optional<Voluntario> consultaVoluntarioId(@PathVariable("idVoluntario") Integer idVoluntario) {
+    public VoluntarioDTO consultaVoluntarioId(@PathVariable("idVoluntario") Integer idVoluntario) {
 
         return VoluntarioService.consultaVoluntarioId(idVoluntario);
+    }
+
+    //GET PARA CONSULTAR TODOS OS VOLUNTARIOS
+    @GetMapping(value = "/consulta")
+    public List<VoluntarioDTO> consultaTodosVoluntarios() {
+
+         List<VoluntarioDTO> list = VoluntarioService.consultaTodosVoluntarios();
+
+        return list;
     }
 
 }
