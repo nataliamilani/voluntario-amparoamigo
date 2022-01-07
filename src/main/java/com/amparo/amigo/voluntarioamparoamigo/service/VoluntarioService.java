@@ -99,15 +99,22 @@ public class VoluntarioService {
         }
     }
 
-    public static VoluntarioDTO consultaVoluntarioCategoriasServicos(String categoria, String tiposervico, String estado, String cidade) {
+    public static List<VoluntarioDTO> consultaVoluntarioCategoriasServicos(String categoria, String tiposervico, String estado, String cidade) {
 
-        var consultaVoluntario = repository.findByVoluntarioCategoriaTipoServico(categoria, tiposervico, estado, cidade).isPresent();
+        var consultaVoluntario = repository.findByVoluntarioCategoriaTipoServico(categoria, tiposervico, estado, cidade);
 
-        if(!consultaVoluntario){
-            throw new VoluntarioNotFoundException("Não foi possível encontrar voluntário com os parâmetros informados!");
+        if(consultaVoluntario.isEmpty()){
+            throw new VoluntarioNotFoundException("Não há voluntários na base de cadastro!");
         }
 
-        return VoluntarioDTO.transformaDTO(repository.findByVoluntarioCategoriaTipoServico(categoria, tiposervico, estado, cidade));
+        List<VoluntarioDTO> listVoluntario = new ArrayList<>();
+
+        for (Integer i=0; i < consultaVoluntario.size(); i++){
+
+            listVoluntario.add(VoluntarioDTO.transformaDTO(consultaVoluntario.get(i)));
+        }
+
+        return listVoluntario;
     }
 
 }

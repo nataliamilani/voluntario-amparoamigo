@@ -21,5 +21,5 @@ public interface VoluntarioRepository extends JpaRepository<Voluntario, String> 
             "where (categoria1 = ?1 or categoria2 = ?1 or categoria3 = ?1) " +
             "and (tiposervico1 = ?2 or tiposervico2 = ?2 or tiposervico3 = ?2) " +
             "and estado = ?3 and cidade = ?4", nativeQuery = true)
-    Optional<Voluntario> findByVoluntarioCategoriaTipoServico(String categoria, String tiposervico, String estado, String cidade);
+    List<Voluntario> findByVoluntarioCategoriaTipoServico(String categoria, String tiposervico, String estado, String cidade);
 }

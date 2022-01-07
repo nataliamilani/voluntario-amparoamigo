@@ -69,7 +69,7 @@ public class VoluntarioController {
 
     //GET PARA CONSULTAR VOLUNTARIOS POR CATEGORIA, TIPO DE SERVICO, ESTADOS E CIDADE
     @GetMapping(value = "/consulta/{categoria}/{tiposervico}/{estado}/{cidade}")
-    public VoluntarioDTO consultaVoluntarioPorCategoriaTipoServico(@PathVariable("categoria") String categoria,
+    public List<VoluntarioDTO> consultaVoluntarioPorCategoriaTipoServico(@PathVariable("categoria") String categoria,
                                               @PathVariable("tiposervico") String tiposervico,
                                               @PathVariable("estado") String estado,
                                               @PathVariable("cidade") String cidade ) {
