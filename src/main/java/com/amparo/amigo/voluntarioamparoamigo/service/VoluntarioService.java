@@ -68,7 +68,46 @@ public class VoluntarioService {
         return listVoluntario;
     }
 
+    public static Voluntario editarDadosVoluntario(Integer idVoluntario, Voluntario voluntarioEditar) {
 
+        var existeVoluntario = repository.findByIdVoluntario(idVoluntario).isPresent();
 
+        if (!existeVoluntario) {
+            throw new VoluntarioNotFoundException("Não existe voluntário cadastrado na base");
+        } else {
+
+            var atualizarVoluntario = repository.findByIdVoluntario(idVoluntario).get();
+
+            atualizarVoluntario.setNome(voluntarioEditar.getNome());
+            atualizarVoluntario.setDataNascimento(voluntarioEditar.getDataNascimento());
+            atualizarVoluntario.setCpfCnpj(voluntarioEditar.getCpfCnpj());
+            atualizarVoluntario.setCelular(voluntarioEditar.getCelular());
+            atualizarVoluntario.setLogradouro(voluntarioEditar.getLogradouro());
+            atualizarVoluntario.setCidade(voluntarioEditar.getCidade());
+            atualizarVoluntario.setEstado(voluntarioEditar.getEstado());
+            atualizarVoluntario.setTiposervico1(voluntarioEditar.getTiposervico1());
+            atualizarVoluntario.setTiposervico2(voluntarioEditar.getTiposervico2());
+            atualizarVoluntario.setTiposervico3(voluntarioEditar.getTiposervico3());
+            atualizarVoluntario.setCategoria1(voluntarioEditar.getCategoria1());
+            atualizarVoluntario.setCategoria2(voluntarioEditar.getCategoria2());
+            atualizarVoluntario.setCategoria3(voluntarioEditar.getCategoria3());
+            atualizarVoluntario.setDescricao(voluntarioEditar.getDescricao());
+            atualizarVoluntario.setEmail(voluntarioEditar.getEmail());
+            atualizarVoluntario.setSenha(voluntarioEditar.getSenha());
+
+            return repository.save(atualizarVoluntario);
+        }
+    }
+
+    public static VoluntarioDTO consultaVoluntarioCategoriasServicos(String categoria, String tiposervico, String estado, String cidade) {
+
+        var consultaVoluntario = repository.findByVoluntarioCategoriaTipoServico(categoria, tiposervico, estado, cidade).isPresent();
+
+        if(!consultaVoluntario){
+            throw new VoluntarioNotFoundException("Não foi possível encontrar voluntário com os parâmetros informados!");
+        }
+
+        return VoluntarioDTO.transformaDTO(repository.findByVoluntarioCategoriaTipoServico(categoria, tiposervico, estado, cidade));
+    }
 
 }
