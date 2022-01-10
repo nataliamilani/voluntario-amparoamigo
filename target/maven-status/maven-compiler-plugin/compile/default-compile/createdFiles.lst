@@ -1,6 +1,7 @@
 com\amparo\amigo\voluntarioamparoamigo\controller\VoluntarioController.class
 com\amparo\amigo\voluntarioamparoamigo\exceptions\VoluntarioNotFoundException.class
 com\amparo\amigo\voluntarioamparoamigo\VoluntarioAmparoamigoApplication.class
+com\amparo\amigo\voluntarioamparoamigo\configuration\CorsConfiguration.class
 com\amparo\amigo\voluntarioamparoamigo\repository\VoluntarioRepository.class
 com\amparo\amigo\voluntarioamparoamigo\configuration\OpenApiConfiguration.class
 com\amparo\amigo\voluntarioamparoamigo\dto\VoluntarioDTO.class
