@@ -1,6 +1,7 @@
 package com.amparo.amigo.voluntarioamparoamigo.controller;
 
 import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioDTO;
+import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioLoginDTO;
 import com.amparo.amigo.voluntarioamparoamigo.entity.Voluntario;
 import com.amparo.amigo.voluntarioamparoamigo.service.VoluntarioService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -77,5 +78,12 @@ public class VoluntarioController {
         return VoluntarioService.consultaVoluntarioCategoriasServicos(categoria, tiposervico, estado, cidade);
     }
 
+    //GET PARA VALIDAR LOGIN DO VOLUNTARIO
+    @GetMapping(value = "/login/{email}/{senha}")
+    public VoluntarioLoginDTO validaLogin(@PathVariable("email") String email,
+                                          @PathVariable("senha") String senha ) {
+
+        return VoluntarioService.validaLogin(email, senha);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.amparo.amigo.voluntarioamparoamigo.service;
 
 import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioDTO;
+import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioLoginDTO;
 import com.amparo.amigo.voluntarioamparoamigo.entity.Voluntario;
 import com.amparo.amigo.voluntarioamparoamigo.exceptions.VoluntarioNotFoundException;
 import com.amparo.amigo.voluntarioamparoamigo.repository.VoluntarioRepository;
@@ -115,6 +116,20 @@ public class VoluntarioService {
         }
 
         return listVoluntario;
+    }
+
+    public static VoluntarioLoginDTO validaLogin(String email, String senha) {
+
+        var existeLogin = repository.findByEmailAndSenha(email, senha).isPresent();
+
+        if(!existeLogin){
+            throw new VoluntarioNotFoundException("ATENÇÃO! Login ou senha inválidos, tente novamente.");
+        }
+
+        var validaLogin = repository.findByEmailAndSenha(email, senha);
+
+        return VoluntarioLoginDTO.transformaLoginDTO(validaLogin, "Acesso permitido");
+
     }
 
 }

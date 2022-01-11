@@ -1,6 +1,7 @@
 package com.amparo.amigo.voluntarioamparoamigo.repository;
 
 import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioDTO;
+import com.amparo.amigo.voluntarioamparoamigo.dto.VoluntarioLoginDTO;
 import com.amparo.amigo.voluntarioamparoamigo.entity.Voluntario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,7 @@ public interface VoluntarioRepository extends JpaRepository<Voluntario, String> 
             "and (tiposervico1 = ?2 or tiposervico2 = ?2 or tiposervico3 = ?2) " +
             "and estado = ?3 and cidade = ?4", nativeQuery = true)
     List<Voluntario> findByVoluntarioCategoriaTipoServico(String categoria, String tiposervico, String estado, String cidade);
+
+    Optional<Voluntario> findByEmailAndSenha(String email, String senha);
+
 }
